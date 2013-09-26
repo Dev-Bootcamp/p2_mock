@@ -12,6 +12,16 @@ get '/sessions/new' do
   erb :sign_in
 end
 
+get '/sessions/:id' do
+  @user = User.find(params[:id])
+  erb :user
+end
+
+get '/add_skills/:id' do
+  @user = User.find(params[:id])
+  erb :add_skills
+end
+
 post '/sessions' do
   # sign-in
   @email = params[:email]
@@ -19,7 +29,7 @@ post '/sessions' do
   if user
     # successfully authenticated; set up session and redirect
     session[:user_id] = user.id
-    redirect '/'
+    redirect "/sessions/#{user.id}"
   else
     # an error occurred, re-render the sign-in form, displaying an error
     @error = "Invalid email or password."
@@ -55,3 +65,17 @@ post '/users' do
     erb :sign_up
   end
 end
+
+post '/add_skills/:id' do
+  p params
+  @user = User.find(params[:id])
+  @skill = Skill.find_or_create_by(name: params[:skill_name], context: params[:skill_context])
+  p @skill
+  if @skill
+    @user.proficiencies << Proficiency.create(skill_id: @skill.id, user_id: @user.id, formal: params[:formal])
+    redirect to ("/sessions/#{@user.id}")
+  else
+    redirect to ('/oops')
+  end
+end
+

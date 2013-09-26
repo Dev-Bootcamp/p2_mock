@@ -10,15 +10,21 @@
       <th>Years</th>
       <th>Formal</th>
     </tr>
-    <% @users.all.each do |user| %>
-      <% user.users_skills.each do |skill| %>
-        <tr>
-          <td><%= user.name %></td>
-          <td><%= skill.name %></td>
-          <td><%= skill.created_at %></td>
-          <td><%= skill.formal %></td>
-        </tr>
-      <% end %>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <% if user.proficiencies.length > 0 %>
+          <% user.proficiencies.each do |proficiency| %>
+            <td><%= proficiency.skill.name %></td>
+            <td><%= proficiency.created_at %></td>
+            <td><%= proficiency.formal %></td>
+          <% end %>
+        <% else %>
+          <td>none</td>
+          <td>NA</td>
+          <td>NA</td>
+        <% end %>
+      </tr>
     <% end %>
 
   </table>

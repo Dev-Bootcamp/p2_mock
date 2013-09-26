@@ -1,0 +1,26 @@
+<h3>USER PAGE</h3>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Skill</th>
+    <th>Years</th>
+    <th>Formal</th>
+  </tr>
+  <tr>
+    <td><%= @user.name %></td>
+    <% if @user.proficiencies.length > 0 %>
+      <% @user.proficiencies.each do |proficiency| %>
+        <td><%= Skill.find(proficiency.skill_id).name %></td>
+        <td><%= proficiency.created_at %></td>
+        <td><%= proficiency.formal %></td>
+      <% end %>
+    <% else %>
+      <td>none</td>
+      <td>NA</td>
+      <td>NA</td>
+    <% end %>
+  </tr>
+</table>
+
+<p><a href="/add_skills/<%= @user.id %>">Add Skills</a></p>

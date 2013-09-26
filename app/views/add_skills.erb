@@ -1,0 +1,23 @@
+ADD SOME SKILLS
+
+<form action='/add_skills/<%= @user.id %>' method='POST'>
+  <label for="skill_name">Skill: 
+    <input id="skill_name" type="text" name="skill_name" placeholder="e.g., tv repair">
+  </label><br>
+  <label for="skill_context">Context:
+    <select id="skill_context" name="skill_context">
+      <option value="creative">creative</option>
+      <option value="technical">technical</option>
+    </select>
+  </label><br>
+  <label for="year_started">Year Started: 
+    <input id="year_started" type="text" name="year_started" placeholder="e.g. 1978">
+  </label><br>
+  <label for="formal">Formal Training? 
+    <select id="formal" name="formal">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+  </label><br>
+  <input id="submit" type="submit" value="submit">
+</form>
