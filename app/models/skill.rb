@@ -4,6 +4,8 @@ class Skill < ActiveRecord::Base
   validates :name, :presence => true
   validate :validate_context
 
+  has_many :users
+
   private
   def validate_context
     p self.context

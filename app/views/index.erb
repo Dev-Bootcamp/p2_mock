@@ -2,4 +2,24 @@
   <h1>User Skills and Levels</h1>
 
   <%# TODO: display the skills and proficiency levels for each user ... %>
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Skill</th>
+      <th>Years</th>
+      <th>Formal</th>
+    </tr>
+    <% @users.all.each do |user| %>
+      <% user.users_skills.each do |skill| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= skill.name %></td>
+          <td><%= skill.created_at %></td>
+          <td><%= skill.formal %></td>
+        </tr>
+      <% end %>
+    <% end %>
+
+  </table>
 </div>
