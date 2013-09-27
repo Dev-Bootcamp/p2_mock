@@ -1,26 +1,33 @@
-<h3>USER PAGE</h3>
+<div class="container">
+  <h3>USER PAGE</h3>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Skill</th>
-    <th>Years</th>
-    <th>Formal</th>
-  </tr>
-  <tr>
-    <td><%= @user.name %></td>
-    <% if @user.proficiencies.length > 0 %>
-      <% @user.proficiencies.each do |proficiency| %>
-        <td><%= Skill.find(proficiency.skill_id).name %></td>
-        <td><%= proficiency.created_at %></td>
-        <td><%= proficiency.formal %></td>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Skills</th>
+      <th>Years</th>
+      <th>Formal</th>
+    </tr>
+    <tr>
+      <td><a href='/sessions/<%= @user.id %>'><%= @user.name %></a></td>
+      <% if @user.proficiencies.length > 0 %>
+        <% @user.proficiencies.each_with_index do |proficiency,index| %>
+          <% if index > 0 %>
+            <tr><td></td>
+          <% end %>
+          <td><%= Skill.find(proficiency.skill_id).name %></td>
+          <td><%= proficiency.created_at %></td>
+          <td><%= proficiency.formal %></td>
+        <% end %>
+      <% else %>
+        <td>none</td>
+        <td>NA</td>
+        <td>NA</td>
       <% end %>
-    <% else %>
-      <td>none</td>
-      <td>NA</td>
-      <td>NA</td>
-    <% end %>
-  </tr>
-</table>
+    </tr>
+  </table>
 
-<p><a href="/add_skills/<%= @user.id %>">Add Skills</a></p>
+  <% if session[:user_id] == @user.id %>
+    <p><a href="/add_skills/<%= @user.id %>">Add Skills</a></p>
+  <% end %>
+</div>

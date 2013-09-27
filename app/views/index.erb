@@ -6,15 +6,18 @@
   <table>
     <tr>
       <th>Name</th>
-      <th>Skill</th>
+      <th>Skills</th>
       <th>Years</th>
       <th>Formal</th>
     </tr>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.name %></td>
+        <td><a href='/sessions/<%= user.id %>'><%= user.name %></a></td>
         <% if user.proficiencies.length > 0 %>
-          <% user.proficiencies.each do |proficiency| %>
+          <% user.proficiencies.each_with_index do |proficiency,index| %>
+            <% if index > 0 %>
+              <tr><td></td>
+            <% end %>
             <td><%= proficiency.skill.name %></td>
             <td><%= proficiency.created_at %></td>
             <td><%= proficiency.formal %></td>
